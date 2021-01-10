@@ -1,0 +1,29 @@
+class MainWidgetModel {
+  String name,
+      email,
+      photo,
+      mobile,
+      age,
+      bp,
+      bodyTempatature,
+      respiration,
+      glucose,
+      heartRate,
+      oxygenSaturation,
+      electroCardiogram,
+      updateTime;
+  MainWidgetModel(
+      {this.name,
+      this.email,
+      this.photo,
+      this.mobile,
+      this.age,
+      this.bp,
+      this.bodyTempatature,
+      this.respiration,
+      this.glucose,
+      this.heartRate,
+      this.oxygenSaturation,
+      this.electroCardiogram,
+      this.updateTime});
+}
