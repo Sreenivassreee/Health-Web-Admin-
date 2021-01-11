@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:web_admin/MainPage.dart';
+import 'package:web_admin/Views/MainPage.dart';
+import 'package:web_admin/Views/SinglePersonScreen.dart';
 
 void main() {
   runApp(MyApp());
