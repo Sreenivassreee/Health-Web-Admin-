@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:web_admin/Models/MainWidgetModel.dart';
 import 'package:web_admin/Views/SinglePersonScreen.dart';
 import 'package:web_admin/Views/Tile.dart';
+import 'package:flutter_string_encryption/flutter_string_encryption.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -14,19 +15,16 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     MainWidgetModel single = MainWidgetModel();
-    Stream<QuerySnapshot> _query = Firestore.instance
-        .collection('Users')
-        // .document()
-        // .collection("EachPara")
-        // .where('email', isEqualTo: widget.email ?? "")
-        .snapshots();
+    Stream<QuerySnapshot> _query =
+        Firestore.instance.collection('Users').snapshots();
     TextEditingController searchEmail = TextEditingController();
+
     toNextPage() {
       if (searchEmail.text != null) {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => SinglePersonScreen(searchEmail.text)));
       } else {
-        print(searchEmail);
+        // print(searchEmail);
       }
     }
 
@@ -91,27 +89,11 @@ class _MainPageState extends State<MainPage> {
                     itemBuilder: (_, i) {
                       single.name = snapshot.data.documents[i]["name"];
                       single.email = snapshot.data.documents[i]["email"];
-
                       single.photo = snapshot.data.documents[i]["photoUrl"];
                       single.mobile = snapshot.data.documents[i]["mobile"];
                       single.age = snapshot.data.documents[i]["age"];
-                      // single.bp = snapshot.data.documents[i]["EachPara"]["EachPara"]
-                      //     ["EachPara"][0]["bp"];
-                      // single.bodyTempatature =
-                      //     snapshot.data.documents[i]["Body_Tempatature"];
-                      // single.respiration =
-                      //     snapshot.data.documents[i]["Respiration"];
-                      // single.glucose = snapshot.data.documents[i]["Glucose"];
-                      // single.heartRate =
-                      //     snapshot.data.documents[i]["Heart_Rate"];
-                      // single.oxygenSaturation =
-                      //     snapshot.data.documents[i]["Oxygen_Saturation"];
-                      // single.electroCardiogram =
-                      //     snapshot.data.documents[i]["Electro_Cardiogram"];
-                      // single.updateTime =
-                      //     snapshot.data.documents[i]["UpdateTime"];
+                      print(single.name);
 
-                      print(single.email);
                       return Scaffold(
                         body: Container(
                           child: Card(

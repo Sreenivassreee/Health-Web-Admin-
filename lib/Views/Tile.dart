@@ -23,10 +23,10 @@ class _TileState extends State<Tile> {
     return StreamBuilder<QuerySnapshot>(
       stream: _query2,
       builder: (BuildContext context, snapshot2) {
-        if (!snapshot2.hasData) {
-          return Center(child: CupertinoActivityIndicator());
+        if (snapshot2.data.documents[1]['EachPara'] == null) {
+          return Center(child: Text("NO Data Found"));
         } else {
-          print("Lenght is ${snapshot2.data.documents.length}");
+          // print("Lenght is ${snapshot2.data.documents.length}");
 
           return Container(
             child: GridView.builder(
@@ -34,22 +34,34 @@ class _TileState extends State<Tile> {
               gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
               itemBuilder: (_, i) {
+                // var bbbbp =
+                //                   snapshot2.data.documents.last['EachPara'].last['bp'];
+                //               print("bbbp" + bbbbp);
+                //               decripte(data) async {
+                //                 // print("Decripted" + data);
+                //                 bpp = await cryptor.decrypt(data, "Sree");
+                //                 print("After Decripted" + bpp);
+                //                 return bpp;
+                //               }
+
                 var bpValue = double.parse(
-                    snapshot2.data.documents.last['EachPara'].last['bp']);
+                    snapshot2.data.documents[1]['EachPara'].last["bp"]);
+                print(bpValue);
+
                 var bodyTempatatureValue = double.parse(snapshot2
-                    .data.documents.last['EachPara'].last["Body_Tempatature"]);
+                    .data.documents[1]['EachPara'].last["Body_Tempatature"]);
                 var respirationValue = double.parse(snapshot2
-                    .data.documents.last['EachPara'].last["Respiration"]);
+                    .data.documents[1]['EachPara'].last["Respiration"]);
                 var glucoseValue = double.parse(
-                    snapshot2.data.documents.last['EachPara'].last["Glucose"]);
-                var heartRateValue = double.parse(snapshot2
-                    .data.documents.last['EachPara'].last["Heart_Rate"]);
+                    snapshot2.data.documents[1]['EachPara'].last["Glucose"]);
+                var heartRateValue = double.parse(
+                    snapshot2.data.documents[1]['EachPara'].last["Heart_Rate"]);
                 var oxygenSaturationValue = double.parse(snapshot2
-                    .data.documents.last['EachPara'].last["Oxygen_Saturation"]);
-                var electroCardiogramValue = double.parse(snapshot2.data
-                    .documents.last['EachPara'].last["Electro_Cardiogram"]);
-                var updateTimeValue = snapshot2
-                    .data.documents.last['EachPara'].last["UpdateTime"];
+                    .data.documents[1]['EachPara'].last["Oxygen_Saturation"]);
+                var electroCardiogramValue = double.parse(snapshot2
+                    .data.documents[1]['EachPara'].last["Electro_Cardiogram"]);
+                var updateTimeValue =
+                    snapshot2.data.documents[1]['EachPara'].last["UpdateTime"];
                 var bp = bpValue / 120 - 0.25;
                 // snapshot.data.documents[0]['EachPara'].last['bp']
                 // ) /
@@ -86,7 +98,8 @@ class _TileState extends State<Tile> {
                 //   0.25;
 
                 var electroCardiogram = electroCardiogramValue / 100 - 0.25;
-                print(updateTimeValue);
+                // print(updateTimeValue);
+
                 return Expanded(
                   child: GestureDetector(
                     onTap: () {

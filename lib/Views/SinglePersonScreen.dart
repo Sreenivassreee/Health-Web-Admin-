@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:web_admin/Views/%20%20diseases_Board.dart';
+import 'package:web_admin/Views/Notifications.dart';
 
 class SinglePersonScreen extends StatefulWidget {
   String singleEmail;
@@ -51,7 +53,7 @@ class _SinglePersonScreenState extends State<SinglePersonScreen> {
     userDetailsdocument =
         await usersDetailsReference.document(widget.singleEmail).get();
     setState(() {
-      print(userDetailsdocument.data["email"]);
+      // print(userDetailsdocument.data["email"]);
       name = userDetailsdocument.data["name"];
       age = userDetailsdocument.data["age"];
       email = userDetailsdocument.data["email"];
@@ -68,11 +70,7 @@ class _SinglePersonScreenState extends State<SinglePersonScreen> {
         .collection("EachPara")
         .document("DocumentDetails")
         .collection("Docs");
-
     qs = await usersDocReference.getDocuments();
-    print(qs.documents.length != 0);
-    print("docDocument.data.length");
-    print(qs.documents.length);
   }
 
   Future<dynamic> getData() async {
@@ -81,7 +79,7 @@ class _SinglePersonScreenState extends State<SinglePersonScreen> {
         .document(widget.singleEmail)
         .collection("EachPara");
     document = await usersReference.document("EachPara").get();
-    print(document.data["EachPara"][document.data.length - 1]["bp"]);
+    // print(document.data["EachPara"][document.data.length - 1]["bp"]);
 
     setState(() {
       bpValue = double.parse(
@@ -753,20 +751,20 @@ class _SinglePersonScreenState extends State<SinglePersonScreen> {
                           )
                         ],
                       ),
-                      // Column(
-                      //   children: [
-                      //     Container(
-                      //       color: Colors.green,
-                      //       height: 200,
-                      //       width: 200,
-                      //     ),
-                      //     Container(
-                      //       color: Colors.pink,
-                      //       height: 200,
-                      //       width: 200,
-                      //     )
-                      //   ],
-                      // ),
+                      Column(
+                        children: [
+                          Container(
+                            height: 250,
+                            width: 250,
+                            child: Diseases(email) ?? Container(),
+                          ),
+                          Container(
+                            height: 250,
+                            width: 250,
+                            child: Notifications(email) ?? Container(),
+                          ),
+                        ],
+                      ),
                       Column(
                         children: [
                           Text(
